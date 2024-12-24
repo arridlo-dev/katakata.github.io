@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kata-Kata Mutiara Hacker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('bg 4.jpg'); /* Pastikan nama file dan jalur benar */
+            background-size: cover; /* Menyesuaikan gambar latar belakang */
+            background-position: center; /* Memusatkan gambar latar belakang */
+            color: rgb(253, 253, 253);
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Mengatur arah flex menjadi kolom */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative; /* Menambahkan posisi relatif untuk body */
+        }
+
+        .text {
+            font-size: 20px; /* Ukuran font responsif */
+            white-space: nowrap;
+            border-right: 2px solid red; /* Efek kursor */
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Media Queries untuk Responsivitas */
+        @media (max-width: 768px) {
+            .foto {
+                width: 150px; /* Ukuran foto lebih kecil di tablet */
+                max-height: 200px; /* Maksimal tinggi untuk foto */
+            }
+
+            .text {
+                font-size: 20px; /* Ukuran teks lebih kecil di tablet */
+            }
+
+            .emot {
+                font-size: 40px; /* Ukuran emotikon lebih kecil di tablet */
+            }
+
+            button {
+                font-size: 16px; /* Ukuran tombol lebih kecil di tablet */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .foto {
+                width: 120px; /* Ukuran foto lebih kecil di ponsel */
+                max-height: 160px; /* Maksimal tinggi untuk foto */
+            }
+
+            .text {
+                font-size: 15px; /* Ukuran teks lebih kecil di ponsel */
+            }
+
+            .emot {
+                font-size: 30px; /* Ukuran emotikon lebih kecil di ponsel */
+            }
+
+            button {
+                font-size: 14px; /* Ukuran tombol lebih kecil di ponsel */
+            }
+        }
+
+        .text-kata {
+            background-color: rgba(0, 0, 0, 0.7); /* Latar belakang semi-transparan */
+            color: #02a50a;
+            position: absolute; /* Memposisikan teks secara absolut */
+            bottom: 20px; /* Jarak dari bawah */
+            width: 100%;
+            text-align: center; /* Mengatur teks agar berada di tengah */
+            padding: 10px 0; /* Memberikan padding atas dan bawah */
+        }
+
+        .marquee {
+            width: 100%;
+            white-space: nowrap; 
+            font-family: hackbot;
+            font-size: 13px;
+            overflow: hidden;
+            box-sizing: border-box;
+            animation: marquee 25s linear infinite; 
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%); 
+            }
+            100% {
+                transform: translateX(-100%); 
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="text" id="kataKata"></div>
+
+    <div class="text-kata">
+        <p class="marquee">Redesain By: AHMAD A`LAMUDDIN ARRIDLO</p>
+    </div>
+
+    <script>
+        const kataKata = [
+            "Tidak Ada Proses Yang Mudah Untuk hasil Yang Indah",
+            "Tetap Fokus Berjuang Karena, Masih Di Zona Berjang",
+            "TAKDIR MILIK ALLAH, TAPI DOA DAN USAHA MILIK KITA",
+            "Kita Tidak Bisa Mengubah Arah Angin,",
+            "TETAPI KITA BISA MENGUBAH LAYAR PRAHUNYA",
+            "~JALALUDDIN RUMI ~"
+        ];
+
+        let index = 0;
+        let charIndex = 0;
+        const textElement = document.getElementById('kataKata');
+        
+        function type() {
+            if (charIndex < kataKata[index].length) {
+                textElement.textContent += kataKata[index].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 150); // Kecepatan mengetik
+            } else {
+                setTimeout(deleteText, 2000); // Tunggu 2 detik sebelum menghapus
+            }
+        }
+        
+        function deleteText() {
+            if (charIndex > 0) {
+                textElement.textContent = kataKata[index].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(deleteText, 35); // Kecepatan menghapus
+            } else {
+                index = (index + 1) % kataKata.length; // Pindah ke kata-kata berikutnya
+                setTimeout(type, 500); // Tunggu sebelum mulai mengetik lagi
+            }
+        }
+       
+        // Mulai efek ketikan
+        type();
+    </script>
+</body>
+</html>
